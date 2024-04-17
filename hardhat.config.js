@@ -1,6 +1,9 @@
 require("@nomicfoundation/hardhat-toolbox");
 require('dotenv').config();
 
+const { ProxyAgent, setGlobalDispatcher } = require("undici");
+const proxyAgent = new ProxyAgent("http://127.0.0.1:7890");
+setGlobalDispatcher(proxyAgent);
 
 
 const INFURA_API_KEY = process.env.INFURA_API_KEY;

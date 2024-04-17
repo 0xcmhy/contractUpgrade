@@ -12,6 +12,7 @@
     "@nomicfoundation/hardhat-toolbox": "^5.0.0",
     "@openzeppelin/contracts-upgradeable": "^5.0.2",
     "dotenv": "^16.4.5",
-    "hardhat": "^2.22.2"
+    "hardhat": "^2.22.2",
+    "undici": "^6.13.0"
   }
 }
