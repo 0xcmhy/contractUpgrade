@@ -24,43 +24,49 @@ async function deployB() {
 async function deployA() {
     const bAddr = await deployB();
     // Obtain reference to contract and ABI.
-    const A = await ethers.getContractFactory("A");
-    console.log("Deploying A to ", network.name);
+    const A = await ethers.getContractFactory("AV1");
+    console.log("Deploying AV1 to ", network.name);
     // Get the first account from the list of 20 created for you by Hardhat
 
     //  Deploy logic contract using the proxy pattern.
     const a = await A.deploy(bAddr)
     await a.waitForDeployment();
     A_ADDR = await a.getAddress();
-    console.log("a deployed to:", await a.getAddress());
+    console.log("AV1 deployed to:", await a.getAddress());
 }
 
-
+async function getAAndB(contractName, contractAddr) {
+    const contract = await ethers.getContractAt(contractName, contractAddr);
+    const aliceValue = await contract.a();
+    const bobValue = await contract.b();
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; a:", aliceValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; b:", bobValue);
+}
 async function getAliceAndBob(contractName, contractAddr) {
     const contract = await ethers.getContractAt(contractName, contractAddr);
     const aliceValue = await contract.alice();
     const bobValue = await contract.bob();
-    console.log("Contract:", contractName, "; Alice:", aliceValue);
-    console.log("Contract:", contractName, "; Bob:", bobValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; Alice:", aliceValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; Bob:", bobValue);
 }
 
-async function A_call_B() {
+async function A_delegateCall_B() {
     const A = await ethers.getContractAt("A", A_ADDR);
     const tx = await A.delegateCallFoo(alice, bob);
     await tx.wait();
-    console.log("Foo function called successfully.");
+    console.log("Foo function delegate called successfully.");
 }
 
 async function main() {
     console.log("***deploy contract***");
     await deployA();
-    console.log("***before calling A_call_B***");
-    await getAliceAndBob("A", A_ADDR);
+    console.log("***before calling A_delegateCall_B***");
+    await getAAndB("AV1", A_ADDR);
     await getAliceAndBob("B", B_ADDR);
-    console.log("***calling A_call_B***");
-    await A_call_B();
-    console.log("***after calling A_call_B***");
-    await getAliceAndBob("A", A_ADDR);
+    console.log('\x1b[31m%s\x1b[0m', "***calling A_delegateCall_B***");
+    await A_delegateCall_B();
+    console.log("***after calling A_delegateCall_B***");
+    await getAAndB("AV1", A_ADDR);
     await getAliceAndBob("B", B_ADDR);
 }
 

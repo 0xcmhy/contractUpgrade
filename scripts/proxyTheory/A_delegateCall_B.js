@@ -40,26 +40,26 @@ async function getAliceAndBob(contractName, contractAddr) {
     const contract = await ethers.getContractAt(contractName, contractAddr);
     const aliceValue = await contract.alice();
     const bobValue = await contract.bob();
-    console.log("Contract:", contractName, "; Alice:", aliceValue);
-    console.log("Contract:", contractName, "; Bob:", bobValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; Alice:", aliceValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; Bob:", bobValue);
 }
 
-async function A_call_B() {
+async function A_delegateCall_B() {
     const A = await ethers.getContractAt("A", A_ADDR);
     const tx = await A.delegateCallFoo(alice, bob);
     await tx.wait();
-    console.log("Foo function called successfully.");
+    console.log("Foo function delegate called successfully.");
 }
 
 async function main() {
     console.log("***deploy contract***");
     await deployA();
-    console.log("***before calling A_call_B***");
+    console.log("***before calling A_delegateCall_B***");
     await getAliceAndBob("A", A_ADDR);
     await getAliceAndBob("B", B_ADDR);
-    console.log("***calling A_call_B***");
-    await A_call_B();
-    console.log("***after calling A_call_B***");
+    console.log('\x1b[31m%s\x1b[0m', "***calling A_delegateCall_B***");
+    await A_delegateCall_B();
+    console.log("***after calling A_delegateCall_B***");
     await getAliceAndBob("A", A_ADDR);
     await getAliceAndBob("B", B_ADDR);
 }

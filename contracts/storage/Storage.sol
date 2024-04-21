@@ -2,6 +2,7 @@
 pragma solidity ^0.8.24;
 
 contract Storage {
+    //slot 0
     uint256 a = 11;
     uint8 b = 12;
     uint128 c = 13;
@@ -11,6 +12,7 @@ contract Storage {
 
     address owner;
     mapping(address => UserInfo) public users;
+    //slot 6
     string  str="name value";
     uint128 f =  14;
 

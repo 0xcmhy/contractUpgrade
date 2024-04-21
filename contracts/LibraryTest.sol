@@ -9,4 +9,3 @@ contract LibraryTest {
         return LibraryDemo.getFromLib();
     }
 }
-

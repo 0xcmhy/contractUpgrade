@@ -6,7 +6,6 @@ var B_ADDR;
 const alice = 1;
 const bob = 2;
 
-
 async function deployB() {
     // Obtain reference to contract and ABI.
     const B = await ethers.getContractFactory("B");
@@ -40,8 +39,8 @@ async function getAliceAndBob(contractName, contractAddr) {
     const contract = await ethers.getContractAt(contractName, contractAddr);
     const aliceValue = await contract.alice();
     const bobValue = await contract.bob();
-    console.log("Contract:", contractName, "; Alice:", aliceValue);
-    console.log("Contract:", contractName, "; Bob:", bobValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; Alice:", aliceValue);
+    console.log('\x1b[32m%s\x1b[0m', "Contract:", contractName, "; Bob:", bobValue);
 }
 
 async function A_call_B() {
@@ -57,7 +56,7 @@ async function main() {
     console.log("***before calling A_call_B***");
     await getAliceAndBob("A", A_ADDR);
     await getAliceAndBob("B", B_ADDR);
-    console.log("***calling A_call_B***");
+    console.log('\x1b[31m%s\x1b[0m', "***calling A_call_B***");
     await A_call_B();
     console.log("***after calling A_call_B***");
     await getAliceAndBob("A", A_ADDR);

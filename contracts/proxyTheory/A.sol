@@ -5,21 +5,21 @@ contract A {
     uint256 public alice;
     uint256 public bob;
 
-    address public b;
-    constructor(address _b) {
-        b = _b;
+    address public addressB;
+    constructor(address _addressB) {
+        addressB = _addressB;
     }
 
     function callFoo(uint256 _alice, uint256 _bob) external {
         (bool success, bytes memory data) =
-                            b.call(abi.encodeWithSignature("foo(uint256,uint256)",
+                            addressB.call(abi.encodeWithSignature("foo(uint256,uint256)",
                 _alice, _bob));
         require(success, "Tx failed");
     }
 
     function delegateCallFoo(uint256 _alice, uint256 _bob) external {
         (bool success, bytes memory data) =
-                            b.delegatecall(abi.encodeWithSignature("foo(uint256,uint256)",
+                            addressB.delegatecall(abi.encodeWithSignature("foo(uint256,uint256)",
                 _alice, _bob));
         require(success, "Tx failed");
     }
