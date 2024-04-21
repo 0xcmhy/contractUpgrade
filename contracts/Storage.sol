@@ -8,7 +8,6 @@ contract Storage {
     bool d = true;
     uint128 e =  14;
     uint256[] public array =  [401,402,403,405,406];
-    uint256[] public dynamicArray;
 
     address owner;
     mapping(address => UserInfo) public users;
