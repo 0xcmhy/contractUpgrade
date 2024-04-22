@@ -26,8 +26,8 @@ contract AV1 {
 }
 
 //contract B {
-//    uint256 public alice;
-//    uint256 public bob;
+//    uint256 public alice; //slot 0
+//    uint256 public bob; //slot 1
 //
 //    function foo(uint256 _alice, uint256 _bob) external {
 //        alice = _alice;
