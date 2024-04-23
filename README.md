@@ -27,3 +27,7 @@ npx hardhat verify --network sepolia proxyAddr
 npx hardhat run --network sepolia scripts/uups/upgrade_Example.js
 npx hardhat verify --network sepolia proxyAddr
 ```
+
+```text
+https://sepolia.etherscan.io/
+```

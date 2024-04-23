@@ -2,7 +2,7 @@
 // to the Hardhat Runtime Environment.
 const {ethers, network, upgrades} = require("hardhat");
 const {address} = require("hardhat/internal/core/config/config-validation");
-const EXAMPLE_PROXY_ADDR = "0x166AdAE9BE08D2d849b8A9bf5a9c32d7162CC9D8";
+const EXAMPLE_PROXY_ADDR = "0xF7e0Df345dFa440E26DefEE5AE366a8C8a8EbDA9";
 
 async function main() {
     const ExampleV1 = await ethers.getContractFactory('ExampleV1');
